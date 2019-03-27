@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">SimpleBluetooth</string>
+    <string name="app_name">Simple Bluetooth - quangtrung2402</string>
+    <string name="str_bt_switch">Turn on/off Bluetooth</string>
+    <string name="str_led_control">Turn on/off LED light</string>
 </resources>

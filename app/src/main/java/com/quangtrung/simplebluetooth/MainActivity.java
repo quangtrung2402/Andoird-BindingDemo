@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -37,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
     // GUI Components
     private TextView mBluetoothStatus;
     private TextView mReadBuffer;
-    private Button mScanBtn;
-    private Button mOffBtn;
     private Button mListPairedDevicesBtn;
     private Button mDiscoverBtn;
     private BluetoothAdapter mBTAdapter;
@@ -51,13 +50,14 @@ public class MainActivity extends AppCompatActivity {
             if (BluetoothDevice.ACTION_FOUND.equals(action)) {
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 // add the name to the list
-                mBTArrayAdapter.add(device.getName() + " (" + device.getAddress()+ ")");
+                mBTArrayAdapter.add(device.getName() + " (" + device.getAddress() + ")");
                 mBTArrayAdapter.notifyDataSetChanged();
             }
         }
     };
     private ListView mDevicesListView;
     private Switch mLED1;
+    private Switch bluetoothPowerSwitch;
     private Handler mHandler; // Our main handler that will receive callback notifications
     private ConnectedThread mConnectedThread; // bluetooth background worker thread to send and receive data
     private BluetoothSocket mBTSocket = null; // bi-directional client-to-client data path
@@ -121,11 +121,10 @@ public class MainActivity extends AppCompatActivity {
 
         mBluetoothStatus = (TextView) findViewById(R.id.bluetoothStatus);
         mReadBuffer = (TextView) findViewById(R.id.readBuffer);
-        mScanBtn = (Button) findViewById(R.id.scan);
-        mOffBtn = (Button) findViewById(R.id.off);
         mDiscoverBtn = (Button) findViewById(R.id.discover);
         mListPairedDevicesBtn = (Button) findViewById(R.id.pairedBtn);
         mLED1 = (Switch) findViewById(R.id.ledSwitch);
+        bluetoothPowerSwitch = findViewById(R.id.bluetoothPowerSwitch);
 
         mBTArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
         mBTAdapter = BluetoothAdapter.getDefaultAdapter(); // get a handle on the bluetooth radio
@@ -161,7 +160,6 @@ public class MainActivity extends AppCompatActivity {
             mBluetoothStatus.setText("Status: Bluetooth not found");
             Toast.makeText(getApplicationContext(), "Bluetooth device not found!", Toast.LENGTH_SHORT).show();
         } else {
-
             mLED1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -170,18 +168,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-
-            mScanBtn.setOnClickListener(new View.OnClickListener() {
+            bluetoothPowerSwitch.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
                 @Override
-                public void onClick(View v) {
-                    bluetoothOn(v);
-                }
-            });
-
-            mOffBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    bluetoothOff(v);
+                public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+                    if (checked) {
+                        bluetoothOn(compoundButton);
+                    } else {
+                        bluetoothOff(compoundButton);
+                    }
                 }
             });
 
@@ -198,6 +192,14 @@ public class MainActivity extends AppCompatActivity {
                     discover(v);
                 }
             });
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(mBTAdapter.isEnabled()){
+            bluetoothOff(null);
         }
     }
 
@@ -223,8 +225,11 @@ public class MainActivity extends AppCompatActivity {
                 // The user picked a contact.
                 // The Intent's data Uri identifies which contact was selected.
                 mBluetoothStatus.setText("Enabled");
-            } else
+                bluetoothPowerSwitch.setChecked(true);
+            } else {
                 mBluetoothStatus.setText("Disabled");
+                bluetoothPowerSwitch.setChecked(false);
+            }
         }
     }
 

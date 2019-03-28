@@ -18,7 +18,7 @@
             android:orientation="horizontal">
 
             <Switch
-                android:id="@+id/bluetoothSwitch"
+                android:id="@+id/bluetoothPowerSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="false"
@@ -38,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.2"
                     android:maxLines="1"
-                    android:text="Status:"
+                    android:text="Status: "
                     android:textSize="@dimen/ts_14"
                     android:textStyle="bold" />
 
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
                 android:maxLines="1"
-                android:text="RX:"
+                android:text="RX: "
                 android:textSize="@dimen/ts_14"
                 android:textStyle="bold" />
 
@@ -109,19 +109,6 @@
                 android:text="Read Buffer"
                 android:textSize="@dimen/ts_14" />
         </LinearLayout>
-
-        <Button
-            android:id="@+id/scan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Bluetooth ON" />
-
-        <Button
-            android:id="@+id/off"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Bluetooth OFF" />
-
 
         <ListView
             android:id="@+id/devicesListView"

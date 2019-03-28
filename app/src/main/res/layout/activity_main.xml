@@ -27,30 +27,30 @@
                 android:textStyle="bold" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginLeft="50dp"
-                android:layout_gravity="center_vertical">
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.2"
                     android:maxLines="1"
-                    android:text="RX:"
+                    android:text="Status:"
                     android:textSize="@dimen/ts_14"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/readBuffer"
+                    android:id="@+id/bluetoothStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.8"
-                    android:maxLines="1"
-                    android:textSize="@dimen/ts_14"
-                    android:text="Read Buffer" />
+                    android:ellipsize="marquee"
+                    android:singleLine="true"
+                    android:text="Bluetooth Status"
+                    android:textSize="@dimen/ts_14" />
             </LinearLayout>
         </LinearLayout>
 
@@ -63,16 +63,16 @@
                 android:id="@+id/pairedBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
                 android:layout_weight="0.5"
+                android:enabled="false"
                 android:text="Paired devices" />
 
             <Button
                 android:id="@+id/discover"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:layout_weight="0.5"
+                android:enabled="false"
                 android:text="Discover" />
         </LinearLayout>
 
@@ -83,9 +83,7 @@
             android:checked="false"
             android:enabled="false"
             android:text="@string/str_led_control"
-            android:textStyle="bold"
-            android:layout_toEndOf="@+id/bluetoothSwitch"/>
-
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -97,30 +95,31 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
                 android:maxLines="1"
-                android:text="Status:"
+                android:text="RX:"
+                android:textSize="@dimen/ts_14"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/bluetoothStatus"
+                android:id="@+id/readBuffer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.8"
-                android:maxLines="1"
-                android:text="Bluetooth Status" />
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:text="Read Buffer"
+                android:textSize="@dimen/ts_14" />
         </LinearLayout>
 
         <Button
             android:id="@+id/scan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:text="Bluetooth ON" />
 
         <Button
             android:id="@+id/off"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/scan"
             android:text="Bluetooth OFF" />
 
 
@@ -128,11 +127,6 @@
             android:id="@+id/devicesListView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/PairedBtn"
-            android:layout_alignEnd="@+id/off"
-            android:layout_alignRight="@+id/off"
             android:choiceMode="singleChoice" />
-
     </LinearLayout>
-
 </RelativeLayout>

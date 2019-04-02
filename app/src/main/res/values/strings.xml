@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Android Self Study</string>
+
+    <string name="currentBtn">Event is listen on current class</string>
+    <string name="separateBtn">Event is listen on separate class</string>
+    <string name="anonymousBtn">Event is listen on anonymous class</string>
+    <string name="innerAnonymousBtn">Event is listen on inner anonymous class</string>
+
+    <string name="currentToast">Your clicked event is catch on listener at current class!</string>
+    <string name="separateToast">Your clicked event is catch on listener at other class!</string>
+    <string name="anonymousToast">Your clicked event is catch on listener at anonymous class!</string>
+    <string name="innerAnonymousToast">Your clicked event is catch on listener at inner anonymous class!</string>
+
+    <string name="errorToast">Oop! Something went wrong!</string>
+
+</resources>
